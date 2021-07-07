@@ -5,44 +5,46 @@ import java.util.Scanner;
 
 public class BinarySearchWord
 {
-	 static int binarySearch(String[] arr, String x)
-	 {
-	       int l = 0, r = arr.length - 1;
-	       while (l <= r) {
-	    	   int m = l + (r - l) / 2;
-	 
-	            int res = x.compareTo(arr[m]);
-	 
-	            // Check if x is present at mid
-	            if (res == 0)
-	                return m;
-	 
-	            // If x greater, ignore left half
-	            if (res > 0)
-	                l = m + 1;
-	 
-	            // If x is smaller, ignore right half
-	            else
-	                r = m - 1;
-	        }
-	 
-	        return -1;
-	    }
-	 
-	    // Driver method to test above
-	    public static void main(String []args)
-	    {
-	        String[] arr = { "contribute", "geeks", "ide", "practice"};
-	        String x = "ide";
-	        int result = binarySearch(arr, x);
-	 
-	        if (result == -1)
-	            System.out.println("Element not present");
-	        else
-	            System.out.println("Element found at "
-	                              + "index " + result);
-	    }
+	static int binarySearchAlgo(String UserStringArray[], String check)
+	{
+		int left=0,right=UserStringArray.length-1;
+		while(left<=right)
+		{
+			int middle = left+(right-1)/2;
+			
+			int temp = check.compareTo(UserStringArray[middle]);
+			
+			if(temp==0)
+				return middle;
+			if(temp>0)
+				left=middle+1;
+			else {
+				right=middle-1;
+			}
+		}
+		return -1;
+	}
 
+	public static void main(String[] args) 
+	{
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter list of word seperaated by comma ',' :");
+		String userString = scanner.next();
+		String[] userStringArray = userString.split(",");
+		Arrays.sort(userStringArray);
+		System.out.println("Enter the word to check :");
+		String check = scanner.next();
+		
+		int result = binarySearchAlgo(userStringArray, check);
+		if(result == -1)
+		{
+			System.out.println("Element not present");
+		}
+		else
+			System.out.println("present at index : "+result);
+		
+		scanner.close();
+	}
 }
 
 
